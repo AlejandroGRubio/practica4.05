@@ -146,7 +146,7 @@ const anyadir = () => {
 
 };
 
-//Seleeciona el elemento y lo borra.
+//Selecciona el elemento y lo borra.
 const borrar = (e) => {
 
    var id = parseInt(e.id) - 100;
@@ -226,11 +226,37 @@ const mostrar = () => {
 
 
 
+window.onload = () => {
+
+    contPendientes = guardarYBorrarPorTagYClase(`div`, `tarea`);
+    contAcabadas = guardarYBorrarPorTagYClase(`div`, `acabada`);
+    addOnClickPorClase(`add`, `anyadir`);
+    addOnClickPorClase(`sho`, `mostrar`);
+
+
+    var elementoArrastrado;
+
+    document.addEventListener(
+        "dragstart",
+        function (evento) {
+            if (evento.target.className == `tarea`) {
+                elementoArrastrado = evento.target;
+            }
+            else if (evento.target.className == `acabada`) {
+                elementoArrastrado = evento.target;
+            }
+        }
+    );
 
 
 
-contPendientes = guardarYBorrarPorTagYClase(`div`, `tarea`);
-contAcabadas = guardarYBorrarPorTagYClase(`div`, `acabada`);
-addOnClickPorClase(`add`, `anyadir`);
-addOnClickPorClase(`sho`, `mostrar`);
+    
+
+
+
+
+} //Fin del código onload.
+
+
+
 
