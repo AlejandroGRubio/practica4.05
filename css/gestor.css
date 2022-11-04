@@ -46,3 +46,37 @@
   display: none;
 }
 
+.tareaBorde {
+  background-color: rgb(126, 16, 16);
+  color: white;
+  width: 95%;
+  height: 85px;
+  margin: 5px;
+  overflow: auto;
+  padding: 0px 2px;
+  border: 0.2em solid green;
+}
+
+.acabadaBorde {
+  background-color: rgb(8, 109, 30);
+  color: white;
+  width: 95%;
+  height: 85px;
+  margin: 5px;
+  overflow: auto;
+  padding: 0px 2px;
+  border: 0.2em solid red;
+}
+
+#pendientesBorde{
+  border: 0.2em solid red;
+}
+
+#acabadasBorde{
+  border: 0.2em solid red;
+}
+
+
+#eliminado{
+  display: none;
+}

@@ -88,7 +88,7 @@ function pasarPendiente(texto) {
     addOnClickPorClase(`end`, `acabar`, `this`);
 
 
-
+    cont.lastElementChild.setAttribute(`draggable`, true);
 
     cont.lastElementChild.lastElementChild.firstElementChild.setAttribute(`id`, contadorPendientes + 100);
     cont.lastElementChild.lastElementChild.lastElementChild.setAttribute(`id`, contadorPendientes + 100);
@@ -112,6 +112,8 @@ function pasarAcabadas(texto) {
     cont.insertAdjacentHTML("beforeend", textoA);
 
     cont = doc.getElementById(contadorAcabadas);
+
+    cont.setAttribute(`draggable`, true);
 
     cont.lastElementChild.firstElementChild.setAttribute(`onclick`, `archivar(this)`);
     cont.lastElementChild.lastElementChild.setAttribute(`onclick`, `volver(this)`);
@@ -248,6 +250,89 @@ window.onload = () => {
         }
     );
 
+    document.addEventListener(
+        "dragenter",
+        function (evento) {
+            if (evento.target.id == `pendientes`) {
+                evento.target.id = `pendientesBorde`;
+            }
+            else if (evento.target.id == `acabadas`) {
+                evento.target.id = `acabadasBorde`;
+            }
+            
+        }
+    );
+
+    document.addEventListener(
+        "dragleave",
+        function (evento) {
+            if (elementoArrastrado.className == `tarea`) {
+                elementoArrastrado.className = `tareaBorde`;
+            }
+            else if (elementoArrastrado.className == `acabada`) {
+                elementoArrastrado.className = `acabadaBorde`;
+            }
+
+           
+        }
+
+    );
+
+    document.addEventListener(
+        "dragover",
+        function (evento) {
+          evento.preventDefault(); 
+          if (evento.target.id == `pendientesBorde`) {
+            evento.target.id = `pendientes`;
+        }
+        else if (evento.target.id == `acabadasBorde`) {
+            evento.target.id = `acabadas`;
+        }
+        }
+      );
+
+
+    document.addEventListener(
+        "dragend",
+        function (evento){
+            if (evento.target.id == `pendientesBorde`) {
+                evento.target.id = `pendientes`;
+            }
+            else if (evento.target.id == `acabadasBorde`) {
+                evento.target.id = `acabadas`;
+            }
+
+            if (elementoArrastrado.className == `tareaBorde`) {
+                elementoArrastrado.className = `tarea`;
+            }
+            else if (elementoArrastrado.className == `acabadaBorde`) {
+                elementoArrastrado.className = `acabada`;
+            }
+        }
+    );
+    
+    document.addEventListener(
+
+        "drop",
+        function (evento) {
+            evento.preventDefault();
+
+            if (elementoArrastrado.className == `tareaBorde` && evento.target.id == `acabadas`) {
+                pasarAcabadas(elementoArrastrado.innerText);
+                elementoArrastrado.id = `eliminado`;
+            }
+            else if (elementoArrastrado.className == `acabadaBorde` && evento.target.id == `pendientes`) {
+                pasarPendiente(elementoArrastrado.innerText);
+                elementoArrastrado.id = `eliminado`;
+            }
+
+
+
+
+        }
+
+
+    );
 
 
     
